@@ -1,0 +1,22 @@
+config {
+    name: "precios valores nulos",
+    type: "assertion",
+    description: "tests sobre tabla stg_precios que comprueba la existencia de valores nulos",
+    schema: "assertions_cne",
+    tags: ['assertions'],
+    dependencies: ["stg_precios_unicos"]
+}
+
+  /*
+  No Nulos: asegurar que valores claves no sean nulos
+  */
+SELECT
+  *
+FROM
+  ${ref("stg_precios_unicos")}
+WHERE
+  codigo_estacion IS NULL
+  OR tipo_combustible IS NULL
+  OR precio IS NULL
+  OR fecha_hora_actualizacion IS NULL
+  OR tipo_atencion IS NULL

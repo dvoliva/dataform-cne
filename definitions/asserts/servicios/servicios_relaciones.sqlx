@@ -1,0 +1,19 @@
+config {
+    name: "servicios relaciones",
+    type: "assertion",
+    description: "test sobre tabla de stg_servicios que comprueba la relacion con la tabla stg_estaciones ",
+    schema: "assertions_cne",
+    tags: ['assertions'],
+    dependencies: ["stg_servicio_detalle"]
+}
+
+SELECT
+  tabla_servicios.codigo_estacion
+FROM
+  ${ref("stg_servicio_detalle")} AS tabla_servicios
+LEFT JOIN
+  ${ref("stg_estaciones")} AS tabla_estaciones
+ON
+  tabla_servicios.codigo_estacion = tabla_estaciones.codigo
+WHERE
+  tabla_estaciones.codigo IS NULL

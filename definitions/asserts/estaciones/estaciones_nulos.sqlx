@@ -1,0 +1,21 @@
+config {
+    name: "estaciones test valores nulos",
+    type: "assertion",
+    description: "tests sobre tabla de servicios que comprueba valores nulos en los datos",
+    schema: "assertions_cne",
+    tags: ['assertions'],
+    dependencies: ["stg_estaciones"]
+}
+
+  /*
+  No Nulos: asegurar que valores claves no sean nulos
+  */
+SELECT
+  *
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  codigo IS NULL
+  OR distribuidor_marca IS NULL
+  OR ubicacion_nombre_comuna IS NULL
+  OR ubicacion_nombre_region IS NULL

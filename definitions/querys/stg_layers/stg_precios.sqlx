@@ -1,0 +1,76 @@
+config {
+    type: "table",
+    description: "tabla con el detalle del precios de los combustibles con los datos en JSON desanidados",
+    schema: "stg_layers_cne",
+    tags: "stg"
+}
+
+  -- Bencian de #93
+SELECT
+  codigo AS codigo_estacion,
+  '93' AS tipo_combustible,
+  JSON_VALUE(precios_93, '$.tipo_atencion') AS tipo_atencion,
+  TIMESTAMP(JSON_VALUE(precios_93, '$.fecha_actualizacion') || ' ' || JSON_VALUE(precios_93, '$.hora_actualizacion')) AS fecha_hora_actualizacion,
+  SAFE_CAST(JSON_VALUE(precios_93, '$.precio') AS NUMERIC) AS precio,
+  JSON_VALUE(precios_93, '$.unidad_cobro') AS unidad_cobro
+FROM
+  ${ref('estaciones_prep')}
+WHERE
+  SAFE.PARSE_JSON(precios_93) IS NOT NULL
+
+UNION ALL
+
+  -- Bencina de #95
+SELECT
+  codigo AS codigo_estacion,
+  '95' AS tipo_combustible,
+  JSON_VALUE(precios_95, '$.tipo_atencion') AS tipo_atencion,
+  TIMESTAMP(JSON_VALUE(precios_95, '$.fecha_actualizacion') || ' ' || JSON_VALUE(precios_95, '$.hora_actualizacion')) AS fecha_hora_actualizacion,
+  SAFE_CAST(JSON_VALUE(precios_95, '$.precio') AS NUMERIC) AS precio,
+  JSON_VALUE(precios_95, '$.unidad_cobro') AS unidad_cobro
+FROM
+  ${ref('estaciones_prep')}
+WHERE
+  SAFE.PARSE_JSON(precios_95) IS NOT NULL
+
+UNION ALL
+
+SELECT
+  codigo AS codigo_estacion,
+  '97' AS tipo_combustible,
+  JSON_VALUE(precios_97, '$.tipo_atencion') AS tipo_atencion,
+  TIMESTAMP(JSON_VALUE(precios_97, '$.fecha_actualizacion') || ' ' || JSON_VALUE(precios_97, '$.hora_actualizacion')) AS fecha_hora_actualizacion,
+  SAFE_CAST(JSON_VALUE(precios_97, '$.precio') AS NUMERIC) AS precio,
+  JSON_VALUE(precios_95, '$.unidad_cobro') AS unidad_cobro
+FROM
+  ${ref('estaciones_prep')}
+WHERE
+  SAFE.PARSE_JSON(precios_97) IS NOT NULL
+
+UNION ALL
+
+SELECT
+  codigo AS codigo_estacion,
+  'DI' AS tipo_combustible,
+  JSON_VALUE(precios_DI, '$.tipo_atencion') AS tipo_atencion,
+  TIMESTAMP(JSON_VALUE(precios_DI, '$.fecha_actualizacion') || ' ' || JSON_VALUE(precios_DI, '$.hora_actualizacion')) AS fecha_hora_actualizacion,
+  SAFE_CAST(JSON_VALUE(precios_DI, '$.precio') AS NUMERIC) AS precio,
+  JSON_VALUE(precios_95, '$.unidad_cobro') AS unidad_cobro
+FROM
+  ${ref('estaciones_prep')}
+WHERE
+  SAFE.PARSE_JSON(precios_DI) IS NOT NULL
+
+UNION ALL
+
+SELECT
+  codigo AS codigo_estacion,
+  'KE' AS tipo_combustible,
+  JSON_VALUE(precios_KE, '$.tipo_atencion') AS tipo_atencion,
+  TIMESTAMP(JSON_VALUE(precios_KE, '$.fecha_actualizacion') || ' ' || JSON_VALUE(precios_KE, '$.hora_actualizacion')) AS fecha_hora_actualizacion,
+  SAFE_CAST(JSON_VALUE(precios_KE, '$.precio') AS NUMERIC) AS precio,
+  JSON_VALUE(precios_95, '$.unidad_cobro') AS unidad_cobro
+FROM
+  ${ref('estaciones_prep')}
+WHERE
+  SAFE.PARSE_JSON(precios_KE) IS NOT NULL

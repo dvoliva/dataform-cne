@@ -1,0 +1,18 @@
+config {
+    name: "servicios nulos",
+    type: "assertion",
+    description: "test sobre tabla de stg_servicios que comprueba valores nulos ",
+    schema: "assertions_cne",
+    tags: ['assertions'],
+    dependencies: ["stg_servicio_detalle"]
+}
+
+  /*
+
+  */
+SELECT
+  codigo_estacion
+FROM
+  ${ref("stg_servicio_detalle")}
+WHERE
+  codigo_estacion IS NULL

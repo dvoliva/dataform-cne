@@ -1,0 +1,21 @@
+config {
+    name: "estaciones test condiciones de fila",
+    type: "assertion",
+    description: "tests sobre tabla de servicios que verifica una condicion de fila",
+    schema: "assertions_cne",
+    tags: ['assertions'],
+    dependencies: ["stg_estaciones"]
+}
+
+/*
+verifica que todas las estaciones están dentro de Chile
+*/
+SELECT
+  codigo
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  ubicacion_latitud < -56
+  OR ubicacion_longitud > -17.5
+  OR ubicacion_latitud < -76
+  OR ubicacion_longitud > -66

@@ -1,0 +1,10 @@
+
+config {
+    type: "table",
+    description: "tabla con el detalle del precios de los combustibles con los datos en JSON desanidados sin duplicados",
+    schema: "stg_layers_cne",
+    tags: "stg"
+}
+
+SELECT DISTINCT *
+FROM ${ref("stg_precios")}

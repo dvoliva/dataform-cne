@@ -1,0 +1,42 @@
+config {
+    type: "table",
+    description: "tabla con los principales datos de cada estación",
+    schema: "stg_layers_cne",
+    tags: "stg"
+}
+
+SELECT
+  DISTINCT(codigo),
+  en_mantenimiento,
+  razon_social,
+  distribuidor_logo,
+  distribuidor_marca,
+  servicios_adblue_granel,
+  servicios_bano_publico,
+  servicios_cajero_automatico,
+  servicios_compresor_de_aire_para_neumaticos,
+  servicios_duchas,
+  servicios_farmacia,
+  servicios_lavado_de_autos,
+  servicios_lubricentro,
+  servicios_servicios_mantencion,
+  servicios_surtidor_para_camiones,
+  servicios_tienda_de_conveniencia,
+  servicios_area_de_juegos_para_menores_de_edad,
+  metodos_de_pago_app_de_pago,
+  metodos_de_pago_billetera_digital,
+  metodos_de_pago_cheque,
+  metodos_de_pago_efectivo,
+  metodos_de_pago_tarjeta_grandes_tiendas,
+  metodos_de_pago_tarjeta_de_credito,
+  metodos_de_pago_tarjeta_de_debito,
+  metodos_de_pago_tarjetas_bancarias,
+  ubicacion_codigo_comuna,
+  ubicacion_codigo_region,
+  ubicacion_direccion,
+  ubicacion_latitud,
+  ubicacion_longitud,
+  ubicacion_nombre_comuna,
+  ubicacion_nombre_region
+FROM
+  ${ref("estaciones_prep")}
