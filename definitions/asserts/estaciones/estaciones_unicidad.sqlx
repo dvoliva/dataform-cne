@@ -1,0 +1,20 @@
+config {
+    name: "estaciones test unicidad",
+    type: "assertion",
+    description: "tests sobre tabla de servicios que verifica la unicidad del codigo de estacion",
+    schema: "assertions_cne",
+    tags: ['assertions'],
+    dependencies: ["stg_estaciones"]
+}
+
+  /*
+  Asegurar que cada estación tenga un identificador único
+  */
+SELECT
+  codigo
+FROM
+  ${ref("stg_estaciones")}
+GROUP BY
+  codigo
+HAVING
+  COUNT(*) > 1

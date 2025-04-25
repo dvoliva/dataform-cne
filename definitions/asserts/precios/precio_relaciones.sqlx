@@ -1,0 +1,22 @@
+config {
+    name: "precios relacion",
+    type: "assertion",
+    description: "tests sobre tabla stg_precios_unicos que comprueba la relacion con la tabla stg_estaciones",
+    schema: "assertions_cne",
+    tags: ['assertions'],
+    dependencies: ["stg_precios_unicos"]
+}
+
+  /*
+  Asegurar que cada codigo_estacion en stg_precios_unicos exista en la tabla stg_estaciones
+  */
+SELECT
+  tabla_precio.codigo_estacion
+FROM
+  ${ref("stg_precios_unicos")} AS tabla_precio
+LEFT JOIN
+  ${ref("stg_estaciones")} AS tabla_estaciones
+ON
+  tabla_precio.codigo_estacion = tabla_estaciones.codigo
+WHERE
+  tabla_estaciones.codigo IS NULL

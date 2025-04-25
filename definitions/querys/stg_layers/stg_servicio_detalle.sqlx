@@ -1,0 +1,105 @@
+config {
+    type: "table",
+    description: "tabla de servicios",
+    schema: "stg_layers_cne",
+    tags: "stg",
+    dependencies: ["stg_estaciones"]
+}
+
+SELECT
+  codigo AS codigo_estacion,
+  'AdBlue a Granel' AS nombre_servicio
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  servicios_adblue_granel = TRUE
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Baño Público' AS nombre_servicio
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  servicios_bano_publico = TRUE
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Cajero Automático' AS nombre_servicio
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  servicios_cajero_automatico
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Aire Para Neumáticos' AS nombre_servicio
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  servicios_compresor_de_aire_para_neumaticos
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Duchas' AS nombre_servicio
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  servicios_duchas
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Farmacia' AS nombre_servicio
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  servicios_farmacia
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Lavado de Auto' AS nombre_servicio
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  servicios_lavado_de_autos
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Lubricentro' AS nombre_servicio
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  servicios_lubricentro
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Servicio de Mantención' AS nombre_servicio
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  servicios_servicios_mantencion
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Surtido para Camiones' AS nombre_servicio
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  servicios_surtidor_para_camiones
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Tienda de Conveniencia' AS nombre_servicio
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  servicios_tienda_de_conveniencia
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Area de Juegos' AS nombre_servicio
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  servicios_area_de_juegos_para_menores_de_edad
+ORDER BY
+  codigo_estacion

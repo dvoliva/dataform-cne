@@ -1,0 +1,19 @@
+config {
+    name: "metodo de pago nulos",
+    type: "assertion",
+    description: "tests sobre tabla metodo de pago que comprueba la existencia de valores nulos",
+    schema: "assertions_cne",
+    tags: ['assertions'],
+    dependencies: ["stg_metodo_pago"]
+}
+
+  /*
+  No Nulos: asegurar que valores claves no sean nulos
+  */
+SELECT
+  *
+FROM
+  ${ref("stg_metodo_pago")}
+WHERE
+  codigo_estacion IS NULL
+  OR metodo_pago IS NULL

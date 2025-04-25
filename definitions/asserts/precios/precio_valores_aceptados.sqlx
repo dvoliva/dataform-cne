@@ -1,0 +1,29 @@
+config {
+    name: "precios valores aceptados",
+    type: "assertion",
+    description: "tests sobre tabla stg_precios_unicos que comprueba los rangos de los campos",
+    schema: "assertions_cne",
+    tags: ['assertions'],
+    dependencies: ["stg_precios_unicos"]
+}
+
+  /*
+  valores aceptados: asegurar que valores claves pertenezcan a cierto rango
+  */
+SELECT
+  DISTINCT(tipo_combustible)
+FROM
+  ${ref("stg_precios_unicos")}
+WHERE
+  tipo_combustible NOT IN ("93",
+    "95",
+    "97",
+    "DI",
+    "KE")
+UNION ALL
+SELECT
+  DISTINCT(tipo_combustible)
+FROM
+  ${ref("stg_precios_unicos")}
+WHERE
+  unidad_cobro NOT IN ("$/L")

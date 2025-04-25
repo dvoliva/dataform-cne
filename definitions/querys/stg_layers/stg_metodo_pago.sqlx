@@ -1,0 +1,73 @@
+config {
+    type: "table",
+    description: "tabla de metodos de pago",
+    schema: "stg_layers_cne",
+    tags: "stg",
+    dependencies: ["stg_estaciones"]
+}
+
+SELECT
+  codigo AS codigo_estacion,
+  'App de Pago' AS metodo_pago
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  metodos_de_pago_app_de_pago = TRUE
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Billetera Digital' AS metodo_pago
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  metodos_de_pago_billetera_digital = TRUE
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Cheque' AS metodo_pago
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  metodos_de_pago_cheque = TRUE
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Efectivo' AS metodo_pago
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  metodos_de_pago_efectivo = TRUE
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Tarjeta Grandes Tiendas' AS metodo_pago
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  metodos_de_pago_tarjeta_grandes_tiendas = TRUE
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Tarjeta de Crédito' AS metodo_pago
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  metodos_de_pago_tarjeta_de_credito = TRUE
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Tarjeta de Débito' AS metodo_pago
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  metodos_de_pago_tarjeta_de_debito = TRUE
+UNION ALL
+SELECT
+  codigo AS codigo_estacion,
+  'Tarjeta Bancarias' AS metodo_pago
+FROM
+  ${ref("stg_estaciones")}
+WHERE
+  metodos_de_pago_tarjetas_bancarias = TRUE
+ORDER BY
+  codigo_estacion
